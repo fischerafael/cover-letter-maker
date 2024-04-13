@@ -9,10 +9,13 @@ export default async function handler(
 
   const finalPrompt = `
     ${promptInstructions}
+    ${`- Escreva a cover letter em ${req.body.language}`}
 
     <cv>${req.body.cv}<cv>
 
     <job-description>${req.body.job_description}<job-description>
+
+    
   `;
 
   const completion = await openai.chat.completions.create({
@@ -40,9 +43,9 @@ const roleMessage = `
 
 const promptInstructions = `
   - Analise o <cv> e a <job-description>
-  - Identifique no <cv> as principais skills, habilidades e resultados alcançados que estão alinhados com a <job-description>
-  - Identifique na <job-description> os requisitos principais que estão contidos no <cv>
+  - Identifique no <cv> as skills mais relevantes, alinhadas com as exigências da <job-description>
+  - Identifique no <cv> skills não ténicas e informações sobre a formação que também possam estar alinhadas com as exigências da <job-description>
   - Com base nisso, escreva uma cover letter para o hiring manager
-  - A cover letter deve ter no máximo 15 linhas de comprimento
-  - Escreva a cover letter em inglês
+  - Tente aplicara o framework STAR - Situation, Task, Action & Results
+  - A cover letter deve ter no máximo 20 linhas de comprimento  
 `;
