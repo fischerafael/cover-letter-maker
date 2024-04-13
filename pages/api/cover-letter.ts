@@ -34,7 +34,7 @@ export default async function handler(
 
   const response = completion.choices[0];
 
-  return res.status(200).json({ job_description: response });
+  return res.status(200).json({ cover_letter: response.message.content });
 }
 
 const roleMessage = `
@@ -43,8 +43,8 @@ const roleMessage = `
 
 const promptInstructions = `
   - Analise o <cv> e a <job-description>
-  - Identifique no <cv> as skills mais relevantes, alinhadas com as exigências da <job-description>
-  - Identifique no <cv> skills não ténicas e informações sobre a formação que também possam estar alinhadas com as exigências da <job-description>
+  - Identifique no <cv> as tech skills mais relevantes (linguagens de programação, frameworks, metodologias, clouds), alinhadas com as exigências da <job-description>
+  - Identifique no <cv> skills não ténicas e informações sobre a formação (graduções, mestrados e doutorados, caso existam) que também possam estar alinhadas com as exigências da <job-description>
   - Com base nisso, escreva uma cover letter para o hiring manager
   - Tente aplicara o framework STAR - Situation, Task, Action & Results
   - A cover letter deve ter no máximo 20 linhas de comprimento  
